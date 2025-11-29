@@ -55,10 +55,12 @@ export default function MainPage() {
               Plan your workouts
             </div>
           </Link>
+          <Link href="/progress" className="flex h-1/3 w-1/3 ">
+            <div className="flex h-full w-full hover:bg-[#1d1d1d] items-center text-white justify-center rounded-4xl border-2 border-[#141414] bg-[#000000]">
+              Track your progress
+            </div>
+          </Link>
 
-          <div className="flex h-1/3 w-1/3 hover:bg-[#1d1d1d] items-center text-white justify-center rounded-4xl border-2 border-[#141414] bg-[#000000]">
-            Track your progress
-          </div>
           <Link href="/splits" className="flex h-1/3 w-1/3 ">
             <div className="flex h-full w-full hover:bg-[#1d1d1d] items-center text-white justify-center rounded-4xl border-2 border-[#141414] bg-[#000000]">
               Choose your splits

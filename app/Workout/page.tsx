@@ -1,5 +1,6 @@
 "use client"
 import NavBarComponent from "@/components/NavBar/navbar"
+import SnowBackground from "@/components/SnowBackground/back"
 import { Context } from "@/providers/Context"
 import {
   ContextMenu,
@@ -10,21 +11,32 @@ import {
 import { IconPlus, IconX } from "@tabler/icons-react"
 import { useContext, useState, useEffect } from "react"
 
+interface Exercise {
+  name: string
+  reps: number
+  weight: number
+}
+
+interface Workout {
+  name: string
+  exercises: Exercise[]
+}
+
 export default function WorkoutPage() {
-  const [monday, setMonday] = useState<string[]>([])
-  const [tuesday, setTuesday] = useState<string[]>([])
-  const [wednesday, setWednesday] = useState<string[]>([])
-  const [thursday, setThursday] = useState<string[]>([])
-  const [friday, setFriday] = useState<string[]>([])
-  const [saturday, setSaturday] = useState<string[]>([])
-  const [sunday, setSunday] = useState<string[]>([])
+  const [monday, setMonday] = useState<Workout[]>([])
+  const [tuesday, setTuesday] = useState<Workout[]>([])
+  const [wednesday, setWednesday] = useState<Workout[]>([])
+  const [thursday, setThursday] = useState<Workout[]>([])
+  const [friday, setFriday] = useState<Workout[]>([])
+  const [saturday, setSaturday] = useState<Workout[]>([])
+  const [sunday, setSunday] = useState<Workout[]>([])
   const { splits } = useContext(Context)!
   const [openWorkoutMenu, setOpenWorkoutMenu] = useState<boolean>(false)
   const [workoutday, setWorkoutday] = useState<string>("")
   const [editIndex, setEditIndex] = useState<number>(-1)
   const [editValue, setEditValue] = useState<string>("")
 
-  const [exercises, setExercises] = useState<string[]>([])
+  const [exercises, setExercises] = useState<Exercise[]>([])
 
   useEffect(() => {
     setMonday(JSON.parse(localStorage.getItem("monday") || "[]"))
@@ -65,31 +77,29 @@ export default function WorkoutPage() {
   }, [sunday])
 
   function OpenMenu(day: string, index: number) {
-    let currentWorkout = ""
-    switch (day) {
-      case "Monday":
-        currentWorkout = monday[index]
-        break
-      case "Tuesday":
-        currentWorkout = tuesday[index]
-        break
-      case "Wednesday":
-        currentWorkout = wednesday[index]
-        break
-      case "Thursday":
-        currentWorkout = thursday[index]
-        break
-      case "Friday":
-        currentWorkout = friday[index]
-        break
-      case "Saturday":
-        currentWorkout = saturday[index]
-        break
-      case "Sunday":
-        currentWorkout = sunday[index]
-        break
+    const getWorkout = (d: string, i: number): Workout => {
+      switch (d) {
+        case "Monday":
+          return monday[i]
+        case "Tuesday":
+          return tuesday[i]
+        case "Wednesday":
+          return wednesday[i]
+        case "Thursday":
+          return thursday[i]
+        case "Friday":
+          return friday[i]
+        case "Saturday":
+          return saturday[i]
+        case "Sunday":
+          return sunday[i]
+        default:
+          throw new Error("Invalid day")
+      }
     }
-    setEditValue(currentWorkout)
+    const currentWorkout = getWorkout(day, index)
+    setEditValue(currentWorkout.name)
+    setExercises(currentWorkout.exercises)
     setOpenWorkoutMenu(true)
     setWorkoutday(day)
     setEditIndex(index)
@@ -99,86 +109,99 @@ export default function WorkoutPage() {
     switch (workoutday) {
       case "Monday":
         const newMonday = [...monday]
-        newMonday[editIndex] = editValue
+        newMonday[editIndex] = { name: editValue, exercises }
         setMonday(newMonday)
         break
       case "Tuesday":
         const newTuesday = [...tuesday]
-        newTuesday[editIndex] = editValue
+        newTuesday[editIndex] = { name: editValue, exercises }
         setTuesday(newTuesday)
         break
       case "Wednesday":
         const newWednesday = [...wednesday]
-        newWednesday[editIndex] = editValue
+        newWednesday[editIndex] = { name: editValue, exercises }
         setWednesday(newWednesday)
         break
       case "Thursday":
         const newThursday = [...thursday]
-        newThursday[editIndex] = editValue
+        newThursday[editIndex] = { name: editValue, exercises }
         setThursday(newThursday)
         break
       case "Friday":
         const newFriday = [...friday]
-        newFriday[editIndex] = editValue
+        newFriday[editIndex] = { name: editValue, exercises }
         setFriday(newFriday)
         break
       case "Saturday":
         const newSaturday = [...saturday]
-        newSaturday[editIndex] = editValue
+        newSaturday[editIndex] = { name: editValue, exercises }
         setSaturday(newSaturday)
         break
       case "Sunday":
         const newSunday = [...sunday]
-        newSunday[editIndex] = editValue
+        newSunday[editIndex] = { name: editValue, exercises }
         setSunday(newSunday)
         break
     }
     setOpenWorkoutMenu(false)
   }
+  function updateExercise(
+    index: number,
+    field: keyof Exercise,
+    value: string | number
+  ) {
+    const newExercises = [...exercises]
+    newExercises[index] = { ...newExercises[index], [field]: value }
+    setExercises(newExercises)
+  }
   function showexerciseinput() {
-    const exercise = prompt("Enter exercise:")
-    if (exercise) {
-      setExercises([...exercises, exercise])
+    const exerciseName = prompt("Enter exercise:")
+    if (exerciseName) {
+      const newExercise: Exercise = { name: exerciseName, reps: 0, weight: 0 }
+      setExercises([...exercises, newExercise])
     }
   }
   function handleAddWorkout(day: string) {
     const workout = prompt(`Enter workout for ${day}:`)
     if (!workout) return
 
+    const newWorkout: Workout = { name: workout, exercises: [] }
+
     switch (day) {
       case "Monday":
-        setMonday([...monday, workout])
+        setMonday([...monday, newWorkout])
         break
       case "Tuesday":
-        setTuesday([...tuesday, workout])
+        setTuesday([...tuesday, newWorkout])
         break
       case "Wednesday":
-        setWednesday([...wednesday, workout])
+        setWednesday([...wednesday, newWorkout])
         break
       case "Thursday":
-        setThursday([...thursday, workout])
+        setThursday([...thursday, newWorkout])
         break
       case "Friday":
-        setFriday([...friday, workout])
+        setFriday([...friday, newWorkout])
         break
       case "Saturday":
-        setSaturday([...saturday, workout])
+        setSaturday([...saturday, newWorkout])
         break
       case "Sunday":
-        setSunday([...sunday, workout])
+        setSunday([...sunday, newWorkout])
         break
     }
   }
   return (
     <div className="h-screen w-full flex">
+      <SnowBackground />
       <div className="fixed w-full z-10">
         <NavBarComponent />
       </div>
-      <div className="w-full h-full flex items-center justify-center">
+      <div className="w-full relative h-full flex items-center justify-center">
         <div className="w-4/5 h-4/5 flex flex-col text-3xl justify-between rounded-4xl bg-[#1d1d1d] p-10">
           {openWorkoutMenu && (
             <div
-              className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+              className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
               onClick={() => setOpenWorkoutMenu(false)}
             >
               <div
@@ -205,19 +228,47 @@ export default function WorkoutPage() {
                       className="w-full text-sm flex items-center flex-row justify-between text-white rounded-2xl p-5 bg-[#212121]"
                       key={i}
                     >
-                      <div className="flex">{exercise}</div>
+                      <div className="flex">{exercise.name}</div>
                       <div className="flex gap-5 flex-row text-xs">
                         <div className="flex items-center gap-1">
                           <p>Reps</p>
-                          <input type="number" className="w-13"></input>
+                          <input
+                            type="number"
+                            min="0"
+                            value={exercise.reps}
+                            onChange={(e) =>
+                              updateExercise(
+                                i,
+                                "reps",
+                                parseInt(e.target.value) || 0
+                              )
+                            }
+                            className="w-13"
+                          />
                         </div>
                         <div className="flex items-center gap-1">
                           <p>Weight</p>
-                          <input type="number" className="w-13"></input>
+                          <input
+                            type="number"
+                            min="0"
+                            value={exercise.weight}
+                            onChange={(e) =>
+                              updateExercise(
+                                i,
+                                "weight",
+                                parseInt(e.target.value) || 0
+                              )
+                            }
+                            className="w-13"
+                          />
                         </div>
                         <div>
                           <button
-                            onClick={() => setExercises(exercises.filter((_, idx) => idx !== i))}
+                            onClick={() =>
+                              setExercises(
+                                exercises.filter((_, idx) => idx !== i)
+                              )
+                            }
                             className="p-1 hover:bg-red-500 rounded"
                           >
                             <IconX />
@@ -260,7 +311,7 @@ export default function WorkoutPage() {
                     <ContextMenu key={i}>
                       <ContextMenuTrigger>
                         <p className="text-sm hover:bg-gray-700 h-10 rounded-3xl p-1 items-center flex justify-center font-bold ">
-                          {workout}
+                          {workout.name}
                         </p>
                       </ContextMenuTrigger>
                       <ContextMenuContent className="bg-white text-sm gap-2 flex flex-col text-black border border-[#b3b3b3] rounded p-2">
@@ -302,7 +353,7 @@ export default function WorkoutPage() {
                     <ContextMenu key={i}>
                       <ContextMenuTrigger>
                         <p className="text-sm hover:bg-gray-700 h-10 rounded-3xl p-1 items-center flex justify-center font-bold ">
-                          {workout}
+                          {workout.name}
                         </p>
                       </ContextMenuTrigger>
                       <ContextMenuContent className="bg-white text-sm gap-2 flex flex-col text-black border border-[#b3b3b3] rounded p-2">
@@ -346,7 +397,7 @@ export default function WorkoutPage() {
                     <ContextMenu key={i}>
                       <ContextMenuTrigger>
                         <p className="text-sm hover:bg-gray-700 h-10 rounded-3xl p-1 items-center flex justify-center font-bold ">
-                          {workout}
+                          {workout.name}
                         </p>
                       </ContextMenuTrigger>
                       <ContextMenuContent className="bg-white text-sm gap-2 flex flex-col text-black border border-[#b3b3b3] rounded p-2">
@@ -390,7 +441,7 @@ export default function WorkoutPage() {
                     <ContextMenu key={i}>
                       <ContextMenuTrigger>
                         <p className="text-sm hover:bg-gray-700 h-10 rounded-3xl p-1 items-center flex justify-center font-bold ">
-                          {workout}
+                          {workout.name}
                         </p>
                       </ContextMenuTrigger>
                       <ContextMenuContent className="bg-white text-sm gap-2 flex flex-col text-black border border-[#b3b3b3] rounded p-2">
@@ -434,7 +485,7 @@ export default function WorkoutPage() {
                     <ContextMenu key={i}>
                       <ContextMenuTrigger>
                         <p className="text-sm hover:bg-gray-700 h-10 rounded-3xl p-1 items-center flex justify-center font-bold ">
-                          {workout}
+                          {workout.name}
                         </p>
                       </ContextMenuTrigger>
                       <ContextMenuContent className="bg-white text-sm gap-2 flex flex-col text-black border border-[#b3b3b3] rounded p-2">
@@ -476,7 +527,7 @@ export default function WorkoutPage() {
                     <ContextMenu key={i}>
                       <ContextMenuTrigger>
                         <p className="text-sm hover:bg-gray-700 h-10 rounded-3xl p-1 items-center flex justify-center font-bold ">
-                          {workout}
+                          {workout.name}
                         </p>
                       </ContextMenuTrigger>
                       <ContextMenuContent className="bg-white text-sm gap-2 flex flex-col text-black border border-[#b3b3b3] rounded p-2">
@@ -520,7 +571,7 @@ export default function WorkoutPage() {
                     <ContextMenu key={i}>
                       <ContextMenuTrigger>
                         <p className="text-sm hover:bg-gray-700 h-10 rounded-3xl p-1 items-center flex justify-center font-bold ">
-                          {workout}
+                          {workout.name}
                         </p>
                       </ContextMenuTrigger>
                       <ContextMenuContent className="bg-white text-sm gap-2 flex flex-col text-black border border-[#b3b3b3] rounded p-2">
