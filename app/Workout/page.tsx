@@ -9,7 +9,7 @@ import {
   ContextMenuTrigger,
 } from "@radix-ui/react-context-menu"
 import { IconPlus, IconX } from "@tabler/icons-react"
-import { useContext, useState, useEffect } from "react"
+import { useContext, useState, useEffect, useRef } from "react"
 
 interface Exercise {
   name: string
@@ -37,42 +37,55 @@ export default function WorkoutPage() {
   const [editValue, setEditValue] = useState<string>("")
 
   const [exercises, setExercises] = useState<Exercise[]>([])
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    setMonday(JSON.parse(localStorage.getItem("monday") || "[]"))
-    setTuesday(JSON.parse(localStorage.getItem("tuesday") || "[]"))
-    setWednesday(JSON.parse(localStorage.getItem("wednesday") || "[]"))
-    setThursday(JSON.parse(localStorage.getItem("thursday") || "[]"))
-    setFriday(JSON.parse(localStorage.getItem("friday") || "[]"))
-    setSaturday(JSON.parse(localStorage.getItem("saturday") || "[]"))
-    setSunday(JSON.parse(localStorage.getItem("sunday") || "[]"))
+    const storedMonday = localStorage.getItem("monday")
+    const storedTuesday = localStorage.getItem("tuesday")
+
+    const storedWednesday = localStorage.getItem("wednesday")
+    const storedThursday = localStorage.getItem("thursday")
+    const storedFriday = localStorage.getItem("friday")
+    const storedSaturday = localStorage.getItem("saturday")
+    const storedSunday = localStorage.getItem("sunday")
+
+    if (storedMonday) setMonday(JSON.parse(storedMonday))
+    if (storedTuesday) setTuesday(JSON.parse(storedTuesday))
+    if (storedWednesday) setWednesday(JSON.parse(storedWednesday))
+    if (storedThursday) setThursday(JSON.parse(storedThursday))
+    if (storedFriday) setFriday(JSON.parse(storedFriday))
+    if (storedSaturday) setSaturday(JSON.parse(storedSaturday))
+    if (storedSunday) setSunday(JSON.parse(storedSunday))
+    setIsLoaded(true)
   }, [])
 
   useEffect(() => {
+    if (!isLoaded) return
     localStorage.setItem("monday", JSON.stringify(monday))
   }, [monday])
-
   useEffect(() => {
+    if (!isLoaded) return
     localStorage.setItem("tuesday", JSON.stringify(tuesday))
   }, [tuesday])
-
   useEffect(() => {
+    if (!isLoaded) return
     localStorage.setItem("wednesday", JSON.stringify(wednesday))
   }, [wednesday])
-
   useEffect(() => {
+    if (!isLoaded) return
     localStorage.setItem("thursday", JSON.stringify(thursday))
   }, [thursday])
-
   useEffect(() => {
+    if (!isLoaded) return
     localStorage.setItem("friday", JSON.stringify(friday))
   }, [friday])
-
   useEffect(() => {
+    if (!isLoaded) return
     localStorage.setItem("saturday", JSON.stringify(saturday))
   }, [saturday])
 
   useEffect(() => {
+    if (!isLoaded) return
     localStorage.setItem("sunday", JSON.stringify(sunday))
   }, [sunday])
 
@@ -192,7 +205,7 @@ export default function WorkoutPage() {
     }
   }
   return (
-    <div className="h-screen w-full flex">
+    <div className="h-screen w-full flex bg-linear-to-b from-[#00eeff] to-[#00779b] ">
       <SnowBackground />
       <div className="fixed w-full z-10">
         <NavBarComponent />
@@ -320,7 +333,7 @@ export default function WorkoutPage() {
                             const newMonday = monday.filter((_, ii) => ii !== i)
                             setMonday(newMonday)
                           }}
-                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-gray-700"
+                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-red-500"
                         >
                           Delete
                         </ContextMenuItem>
@@ -364,7 +377,7 @@ export default function WorkoutPage() {
                             )
                             setTuesday(newTuesday)
                           }}
-                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-gray-700"
+                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-red-500"
                         >
                           Delete
                         </ContextMenuItem>
@@ -408,7 +421,7 @@ export default function WorkoutPage() {
                             )
                             setWednesday(newWednesday)
                           }}
-                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-gray-700"
+                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-red-500"
                         >
                           Delete
                         </ContextMenuItem>
@@ -452,7 +465,7 @@ export default function WorkoutPage() {
                             )
                             setThursday(newThursday)
                           }}
-                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-gray-700"
+                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-red-500"
                         >
                           Delete
                         </ContextMenuItem>
@@ -494,7 +507,7 @@ export default function WorkoutPage() {
                             const newFriday = friday.filter((_, ii) => ii !== i)
                             setFriday(newFriday)
                           }}
-                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-gray-700"
+                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-red-500"
                         >
                           Delete
                         </ContextMenuItem>
@@ -538,7 +551,7 @@ export default function WorkoutPage() {
                             )
                             setSaturday(newSaturday)
                           }}
-                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-gray-700"
+                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-red-500"
                         >
                           Delete
                         </ContextMenuItem>
@@ -580,7 +593,7 @@ export default function WorkoutPage() {
                             const newSunday = sunday.filter((_, ii) => ii !== i)
                             setSunday(newSunday)
                           }}
-                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-gray-700"
+                          className=" p-2 border rounded-md items-center justify-center flex hover:bg-red-500"
                         >
                           Delete
                         </ContextMenuItem>

@@ -8,17 +8,26 @@ export default function ProgressPage() {
   const [chest, setChest] = useState<number | "">("")
   const [thigh, setThigh] = useState<number | "">("")
   const [biceps, setBiceps] = useState<number | "">("")
+  const [bpress, setBpress] = useState<number | "">("")
+  const [squat, setSquat] = useState<number | "">("")
+  const [deadlift, setDeadlift] = useState<number | "">("")
 
   useEffect(() => {
     const storedWaist = localStorage.getItem("waist")
     const storedChest = localStorage.getItem("chest")
     const storedThigh = localStorage.getItem("thigh")
     const storedBiceps = localStorage.getItem("biceps")
+    const storedBpress = localStorage.getItem("bpress")
+    const storedSquat = localStorage.getItem("squat")
+    const storedDeadlift = localStorage.getItem("deadlift")
 
     if (storedWaist) setWaist(Number(storedWaist))
     if (storedChest) setChest(Number(storedChest))
     if (storedThigh) setThigh(Number(storedThigh))
     if (storedBiceps) setBiceps(Number(storedBiceps))
+    if (storedBpress) setBpress(Number(storedBpress))
+    if (storedSquat) setSquat(Number(storedSquat))
+    if (storedDeadlift) setDeadlift(Number(storedDeadlift))
   }, [])
 
   useEffect(() => {
@@ -40,13 +49,28 @@ export default function ProgressPage() {
   }, [thigh])
 
   useEffect(() => {
-    if (biceps !== "ss") {
+    if (biceps !== "") {
       localStorage.setItem("biceps", biceps.toString())
     }
   }, [biceps])
+  useEffect(() => {
+    if (bpress !== "") {
+      localStorage.setItem("bpress", bpress.toString())
+    }
+  }, [bpress])
+  useEffect(() => {
+    if (squat !== "") {
+      localStorage.setItem("squat", squat.toString())
+    }
+  }, [squat])
+  useEffect(() => {
+    if (deadlift !== "") {
+      localStorage.setItem("deadlift", deadlift.toString())
+    }
+  }, [deadlift])
 
   return (
-    <div className="h-screen w-full">
+    <div className="h-screen w-full bg-linear-to-b from-[#00eeff] to-[#0281a8]">
       <SnowBackground />
       <div className="w-full fixed z-50">
         <NavBarComponent />
@@ -61,15 +85,19 @@ export default function ProgressPage() {
               <div className="w-full flex h-1/12 items-center justify-center ">
                 <p className="font-bold text-white text-xl"> Measurements</p>
               </div>
-              <div className="w-full font-bold items-center  text-white h-11/12 flex flex-col">
+              <div className="w-full font-bold items-center gap-5 justify-center text-white h-11/12 flex flex-col">
                 <div className="flex gap-5  items-center">
                   <p>Waist:</p>{" "}
                   <input
                     type="number"
                     min="0"
-                    onChange={(e) => setWaist(e.target.value)}
+                    onChange={(e) =>
+                      setWaist(
+                        e.target.value === "" ? "" : Number(e.target.value)
+                      )
+                    }
                     value={waist}
-                    className="w-20"
+                    className="w-30 border-black border rounded-md p-5"
                   />
                 </div>
                 <div className="flex gap-5  items-center">
@@ -77,9 +105,13 @@ export default function ProgressPage() {
                   <input
                     type="number"
                     min="0"
-                    onChange={(e) => setChest(e.target.value)}
+                    onChange={(e) =>
+                      setChest(
+                        e.target.value === "" ? "" : Number(e.target.value)
+                      )
+                    }
                     value={chest}
-                    className="w-20"
+                    className="w-30 border-black border rounded-md p-5"
                   />
                 </div>
                 <div className="flex  gap-5  items-center">
@@ -87,9 +119,13 @@ export default function ProgressPage() {
                   <input
                     type="number"
                     value={thigh}
-                    onChange={(e) => setThigh(e.target.value)}
+                    onChange={(e) =>
+                      setThigh(
+                        e.target.value === "" ? "" : Number(e.target.value)
+                      )
+                    }
                     min="0"
-                    className="w-20"
+                    className="w-30 border-black border rounded-md p-5"
                   />
                 </div>
                 <div className="flex gap-5  items-center">
@@ -98,13 +134,65 @@ export default function ProgressPage() {
                     type="number"
                     min="0"
                     value={biceps}
-                    onChange={(e) => setBiceps(e.target.value)}
-                    className="w-20"
+                    onChange={(e) =>
+                      setBiceps(
+                        e.target.value === "" ? "" : Number(e.target.value)
+                      )
+                    }
+                    className="w-30 border-black border rounded-md p-5"
                   />
                 </div>
               </div>
             </div>
-            <div className="flex  p-5 items-center justify-center h-full w-1/2 border-l border-black"></div>
+            <div className="flex items-center justify-center h-full flex-col w-1/2 border-l border-black">
+              <div className="w-full h-1/12 flex items-center justify-center">
+                <p className="font-bold text-white text-xl">Maxes</p>
+              </div>
+              <div className="h-11/12 w-full gap-5 flex  justify-center items-center flex-col font-bold text-white">
+                <div className="flex gap-5 items-center">
+                  <p>Bench Press:</p>
+                  <input
+                    type="number"
+                    min="0"
+                    value={bpress}
+                    className="w-30 border-black border rounded-md p-5"
+                    onChange={(e) =>
+                      setBpress(
+                        e.target.value === "" ? "" : Number(e.target.value)
+                      )
+                    }
+                  />
+                </div>
+                <div className="flex gap-5 items-center">
+                  <p>Squat:</p>
+                  <input
+                    type="number"
+                    min="0"
+                    value={squat}
+                    className="w-30 border-black border rounded-md p-5"
+                    onChange={(e) =>
+                      setSquat(
+                        e.target.value === "" ? "" : Number(e.target.value)
+                      )
+                    }
+                  />
+                </div>
+                <div className="flex gap-5 items-center">
+                  <p>DeadLift:</p>
+                  <input
+                    type="number"
+                    min="0"
+                    className="w-30 border-black border rounded-md p-5"
+                    value={deadlift}
+                    onChange={(e) =>
+                      setDeadlift(
+                        e.target.value === "" ? "" : Number(e.target.value)
+                      )
+                    }
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
