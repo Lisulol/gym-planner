@@ -211,7 +211,7 @@ export default function WorkoutPage() {
         <NavBarComponent />
       </div>
       <div className="w-full relative h-full flex items-center justify-center">
-        <div className="w-4/5 h-4/5 flex flex-col text-3xl justify-between rounded-4xl bg-[#1d1d1d] p-10">
+        <div className="min-w-4/5 min-h-4/5 w-4/5 h-4/5 flex flex-col text-3xl justify-between rounded-4xl bg-[#1d1d1d] p-10">
           {openWorkoutMenu && (
             <div
               className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
@@ -314,7 +314,7 @@ export default function WorkoutPage() {
               </div>
             </div>
           )}
-          <div className="w-full items-center justify-between flex border-[#747474] border-2 rounded-3xl p-5 text-white">
+          <div className="w-full items-center justify-between flex border-[#747474] border-2 max-h-1/12 rounded-3xl p-5 text-white">
             <div className="flex flex-row justify-center items-center gap-5">
               <div className="h-3 w-3 rounded-full border-2"></div>
               <p>Monday</p>
@@ -356,7 +356,7 @@ export default function WorkoutPage() {
               <IconPlus />
             </button>
           </div>
-          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2 rounded-3xl p-5">
+          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2  max-h-1/12 rounded-3xl p-5">
             <div className="flex flex-row justify-center items-center gap-2">
               <div className="h-3 w-3 rounded-full border-2"></div>
               <p>Tuesday</p>
@@ -400,7 +400,7 @@ export default function WorkoutPage() {
               <IconPlus />
             </button>
           </div>
-          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2 rounded-3xl p-5">
+          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2 max-h-1/12 rounded-3xl p-5">
             <div className="flex flex-row justify-center items-center gap-2">
               <div className="h-3 w-3 rounded-full border-2"></div>
               <p>Wednesday</p>
@@ -444,7 +444,7 @@ export default function WorkoutPage() {
               <IconPlus />
             </button>
           </div>
-          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2 rounded-3xl p-5">
+          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2 max-h-1/12 rounded-3xl p-5">
             <div className="flex flex-row justify-center items-center gap-2">
               <div className="h-3 w-3 rounded-full border-2"></div>
               <p>Thursday</p>
@@ -488,7 +488,7 @@ export default function WorkoutPage() {
               <IconPlus />
             </button>
           </div>
-          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2 rounded-3xl p-5">
+          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2 max-h-1/12 rounded-3xl p-5">
             <div className="flex flex-row justify-center items-center gap-2">
               <div className="h-3 w-3 rounded-full border-2"></div>
               <p>Friday</p>
@@ -530,7 +530,7 @@ export default function WorkoutPage() {
               <IconPlus />
             </button>
           </div>
-          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2 rounded-3xl p-5">
+          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2 max-h-1/12 rounded-3xl p-5">
             <div className="flex flex-row justify-center items-center gap-2">
               <div className="h-3 w-3 rounded-full border-2"></div>
               <p>Saturday</p>
@@ -574,7 +574,7 @@ export default function WorkoutPage() {
               <IconPlus />
             </button>
           </div>
-          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2 rounded-3xl p-5">
+          <div className="w-full items-center justify-between flex text-white border-[#747474] border-2 max-h-1/12 rounded-3xl p-5">
             <div className="flex flex-row justify-center items-center gap-2">
               <div className="h-3 w-3 rounded-full border-2"></div>
               <p>Sunday</p>
@@ -610,7 +610,7 @@ export default function WorkoutPage() {
               )}
             </div>
             <button
-              className="p-2 bg-[#3b3939] rounded hover:bg-[#525050]"
+              className="p-2 bg-[#3b3939] rounded max- hover:bg-[#525050]"
               onClick={() => handleAddWorkout("Sunday")}
             >
               <IconPlus />

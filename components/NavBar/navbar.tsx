@@ -39,17 +39,38 @@ export default function NavBarComponent() {
         </div>
       </div>
       {openMenu && (
-        <div className="h-screen w-30 items-center justify-center gap-50 bg-[#161616] text-white flex flex-col border-r-6 border-[#393d3d]">
-          <Link href="/Workout">
-            <p className="hover:bg-gray-600 rounded p-3">Workout Planner</p>
-          </Link>
-          <Link href="/progress">
-            <p className="hover:bg-gray-600 rounded p-3">Progress Tracker</p>
-          </Link>
-          <Link href="/splits">
-            <p className="hover:bg-gray-600 rounded p-3">Splits</p>
-          </Link>
-        </div>
+        <>
+          <div
+            className="fixed top-16 left-0 right-0 bottom-0 bg-black/50 z-30"
+            onClick={() => setOpenMenu(false)}
+          />
+
+          <div className="fixed top-16 left-0 bottom-0 w-4/5 sm:w-64 bg-[#161616] text-white z-40 border-r border-[#393d3d] shadow-lg transform transition-transform">
+            <div className="h-full flex flex-col py-4 justify-center">
+              <Link
+                href="/Workout"
+                onClick={() => setOpenMenu(false)}
+                className="block w-full text-left hover:bg-gray-600 rounded p-3"
+              >
+                <p>Workout Planner</p>
+              </Link>
+              <Link
+                href="/progress"
+                onClick={() => setOpenMenu(false)}
+                className="block w-full text-left hover:bg-gray-600 rounded p-3"
+              >
+                <p>Progress Tracker</p>
+              </Link>
+              <Link
+                href="/splits"
+                onClick={() => setOpenMenu(false)}
+                className="block w-full text-left hover:bg-gray-600 rounded p-3"
+              >
+                <p>Splits</p>
+              </Link>
+            </div>
+          </div>
+        </>
       )}
     </div>
   )

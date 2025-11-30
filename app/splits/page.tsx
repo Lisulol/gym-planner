@@ -16,7 +16,7 @@ export default function Spilts() {
   }, [showlsplits])
 
   return (
-    <div className="h-screen w-full flex bg-linear-to-b from-[#00eeff] to-[#0281a8]">
+    <div className="h-screen w-full flex bg-linear-to-b from-[#00eeff] to-[#0281a8] overflow-hidden">
       <SnowBackground />
       <div className="fixed w-full z-10">
         <NavBarComponent />
@@ -25,11 +25,11 @@ export default function Spilts() {
         {showlsplits && (
           <div
             onClick={() => setShowlsplits(false)}
-            className="fixed w-full h-full flex items-center justify-center z-20"
+            className="fixed w-full max-h-11/12 h-full flex items-end justify-center z-20"
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="flex w-4/5 h-4/5 flex-col bg-[#222222] rounded-4xl border-2"
+              className="flex w-11/12 sm:w-4/5 max-w-4xl h-4/5 flex-col bg-[#222222] rounded-4xl border-2 overflow-hidden p-4 sm:p-10 mx-auto"
             >
               <div className="w-full p-10 flex items-center justify-center border-b-4 border-black">
                 <p className="font-bold text-2xl text-white">
@@ -37,9 +37,9 @@ export default function Spilts() {
                 </p>
               </div>
               {page === 0 && (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-10">
-                  <div className="w-full flex items-center justify-center h-4/5">
-                    <p className="text-white  font-bold text-center w-3/5">
+                <div className="w-full max-h-8/12 h-full flex flex-col items-center justify-center gap-10 overflow-y-auto">
+                  <div className="w-full flex items-start md:items-center justify-start md:justify-center h-auto md:h-4/5 pt-4 md:pt-0">
+                    <p className="text-white font-bold text-center w-full md:w-3/5 px-4">
                       Splits are a way to organize your workouts throughout the
                       week
                       <br />
@@ -70,14 +70,14 @@ export default function Spilts() {
                 </div>
               )}
               {page === 1 && (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-10">
-                  <div className="w-full flex flex-col items-center justify-center h-4/5">
+                <div className="w-full h-full flex flex-col items-center justify-center gap-10 overflow-y-auto">
+                  <div className="w-full flex flex-col items-start md:items-center justify-start md:justify-center h-auto md:h-4/5 pt-4 md:pt-0">
                     <div className="w-full flex items-center justify-center">
                       <p className="font-bold text-2xl text-white">
                         Body Part Splits
                       </p>
                     </div>
-                    <p className="text-white  font-bold text-center w-3/5">
+                    <p className="text-white font-bold text-center w-full md:w-3/5 px-4">
                       Choose a split that fits your schedule and goals. Below
                       are the most common options
                       <br />• Full-Body: Train all major muscle groups each
@@ -112,12 +112,12 @@ export default function Spilts() {
                 </div>
               )}
               {page === 2 && (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-10">
-                  <div className="w-full flex flex-col items-center justify-center h-4/5">
+                <div className="w-full h-full flex flex-col items-center justify-center gap-10 overflow-y-auto">
+                  <div className="w-full flex flex-col items-start md:items-center justify-start md:justify-center h-auto md:h-4/5 pt-4 md:pt-0">
                     <div className="w-full flex items-center justify-center">
                       <p className="font-bold text-2xl text-white">FBW</p>
                     </div>
-                    <p className="text-white  font-bold text-center w-full p-20 ">
+                    <p className="text-white font-bold text-center w-full p-6 sm:p-20">
                       FBW aka Full Body Workout is a training split where you
                       work out all major muscle groups in a single session. This
                       split is typically performed 3 times a week, allowing for
@@ -148,12 +148,12 @@ export default function Spilts() {
                 </div>
               )}
               {page === 3 && (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-10">
-                  <div className="w-full flex flex-col items-center justify-center h-4/5">
+                <div className="w-full h-full flex flex-col items-center justify-center gap-10 overflow-y-auto">
+                  <div className="w-full flex flex-col items-start md:items-center justify-start md:justify-center h-auto md:h-4/5 pt-4 md:pt-0">
                     <div className="w-full flex items-center justify-center">
                       <p className="font-bold text-2xl text-white">PPL</p>
                     </div>
-                    <p className="text-white  font-bold text-center w-full p-20 ">
+                    <p className="text-white font-bold text-center w-full p-6 sm:p-20">
                       PPL aka Push Pull Legs is a training split that divides
                       workouts into three categories: push exercises (chest,
                       shoulders, triceps), pull exercises (back, biceps), and
@@ -186,14 +186,14 @@ export default function Spilts() {
                 </div>
               )}
               {page === 4 && (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-10">
-                  <div className="w-full flex flex-col items-center justify-center h-4/5">
+                <div className="w-full h-full flex flex-col items-center justify-center gap-10 overflow-y-auto">
+                  <div className="w-full flex flex-col items-start md:items-center justify-start md:justify-center h-auto md:h-4/5 pt-4 md:pt-0">
                     <div className="w-full flex items-center justify-center">
                       <p className="font-bold text-2xl text-white">
                         Upper/Lower
                       </p>
                     </div>
-                    <p className="text-white  font-bold text-center w-full p-20 ">
+                    <p className="text-white font-bold text-center w-full p-6 sm:p-20">
                       Upper/Lower Split is a training split that alternates
                       upper and lower body days. Typically, you would train your
                       upper body on one day (focusing on chest, back, shoulders,
@@ -227,14 +227,14 @@ export default function Spilts() {
                 </div>
               )}
               {page === 5 && (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-10">
-                  <div className="w-full flex flex-col items-center justify-center h-4/5">
+                <div className="w-full h-full flex flex-col items-center justify-center gap-10 overflow-y-auto">
+                  <div className="w-full flex flex-col items-start md:items-center justify-start md:justify-center h-auto md:h-4/5 pt-4 md:pt-0">
                     <div className="w-full flex items-center justify-center">
                       <p className="font-bold text-2xl text-white">
                         Hybrid Splits
                       </p>
                     </div>
-                    <p className="text-white  font-bold text-center w-full p-20 ">
+                    <p className="text-white font-bold text-center w-full p-6 sm:p-20">
                       Hybrid Split is a flexible training approach that combines
                       elements from various workout splits to create a
                       personalized routine. This method allows individuals to
@@ -268,8 +268,8 @@ export default function Spilts() {
                 </div>
               )}
               {page === 6 && (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-10">
-                  <div className="w-full flex flex-col items-center justify-center h-4/5">
+                <div className="w-full h-full flex flex-col items-center justify-center gap-10 overflow-y-auto">
+                  <div className="w-full flex flex-col items-start md:items-center justify-start md:justify-center h-auto md:h-4/5 pt-4 md:pt-0">
                     <div className="w-full flex items-center justify-center">
                       <p className="font-bold text-2xl text-white">
                         BRO SPLITS!!!
@@ -307,7 +307,7 @@ export default function Spilts() {
                 </div>
               )}
               {page === 7 && (
-                <div className="w-full h-full flex flex-col items-center justify-center gap-10">
+                <div className="w-full h-full flex flex-col items-center justify-center gap-10 overflow-y-auto">
                   <div className="w-full flex flex-col items-center justify-center h-4/5">
                     <div className="w-full flex items-center justify-center">
                       <p className="font-bold text-2xl text-white">
@@ -338,7 +338,7 @@ export default function Spilts() {
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="flex w-4/5 h-4/5 flex-col bg-[#222222] rounded-4xl border-2"
+              className="flex w-11/12 sm:w-4/5 max-w-4xl h-4/5 flex-col bg-[#222222] rounded-4xl border-2 overflow-hidden p-4 sm:p-10 mx-auto"
             >
               <div className="w-full p-10 flex items-center justify-center border-b-4 border-black">
                 <p className="font-bold text-2xl text-white">
@@ -456,21 +456,21 @@ export default function Spilts() {
           </div>
         )}
         <div className="h-full w-full flex items-center justify-center">
-          <div className="w-4/5 h-4/5 flex border-2 border-black flex-col text-3xl justify-between rounded-4xl bg-[#1d1d1d] pt-10">
+          <div className="w-11/12 sm:w-4/5 max-w-4xl h-4/5 flex border-2 border-black flex-col text-3xl justify-between rounded-4xl bg-[#1d1d1d] pt-4 sm:pt-10 overflow-hidden p-4 sm:p-8 mx-auto">
             <div className="w-full  border-b-2 border-black  p-5 flex items-center justify-center">
               <p className="font-bold text-white">Splits </p>
             </div>
             <div className="flex w-full h-full items-center justify-center">
-              <div className="flex w-4/5 gap-5 h-4/5 items-center">
+              <div className="flex flex-col md:flex-row w-full gap-5 h-full items-center px-4">
                 <button
                   onClick={() => setShowlsplits(true)}
-                  className="font-bold text-white border border-black p-15  items-center justify-center flex rounded-4xl hover:bg-[#333333] hover:border-white "
+                  className="font-bold text-white border border-black p-5 sm:p-8 w-full md:w-1/2 items-center justify-center flex rounded-4xl hover:bg-[#333333] hover:border-white"
                 >
                   Learn your Splits
                 </button>
                 <button
                   onClick={() => setShowcsplits(true)}
-                  className="font-bold text-white border border-black p-15  items-center justify-center flex rounded-4xl hover:bg-[#333333] hover:border-white "
+                  className="font-bold text-white border border-black p-5 sm:p-8 w-full md:w-1/2 items-center justify-center flex rounded-4xl hover:bg-[#333333] hover:border-white"
                 >
                   Choose your splits
                 </button>

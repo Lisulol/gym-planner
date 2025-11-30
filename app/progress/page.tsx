@@ -70,24 +70,24 @@ export default function ProgressPage() {
   }, [deadlift])
 
   return (
-    <div className="h-screen w-full bg-linear-to-b from-[#00eeff] to-[#0281a8]">
+    <div className="h-screen w-full bg-linear-to-b overflow-hidden from-[#00eeff] to-[#0281a8]">
       <SnowBackground />
       <div className="w-full fixed z-50">
         <NavBarComponent />
       </div>
       <div className="relative w-full h-full flex items-center justify-center z-10">
-        <div className="w-4/5 h-4/5 flex flex-col text-3xl rounded-4xl bg-[#1d1d1d] ">
+        <div className="w-11/12 sm:w-4/5 max-w-4xl h-4/5 flex flex-col text-3xl rounded-4xl bg-[#1d1d1d] p-4 sm:p-10 mx-auto overflow-hidden">
           <div className="w-full p-5 flex items-center text-2xl font-bold text-white justify-center  border-b-2 border-black">
             <p>Progress Tracker</p>
           </div>
-          <div className="w-full h-full flex ">
-            <div className="flex p-5 flex-col justify-center h-full w-1/2 border-r border-black">
+          <div className="w-full h-full overflow-y-auto flex flex-col md:flex-row">
+            <div className="flex p-4 md:p-5 flex-col justify-center h-full w-full md:w-1/2 md:border-r md:border-black">
               <div className="w-full flex h-1/12 items-center justify-center ">
                 <p className="font-bold text-white text-xl"> Measurements</p>
               </div>
               <div className="w-full font-bold items-center gap-5 justify-center text-white h-11/12 flex flex-col">
-                <div className="flex gap-5  items-center">
-                  <p>Waist:</p>{" "}
+                <div className="flex gap-4 items-center w-full justify-between">
+                  <p className="shrink-0">Waist:</p>
                   <input
                     type="number"
                     min="0"
@@ -97,11 +97,11 @@ export default function ProgressPage() {
                       )
                     }
                     value={waist}
-                    className="w-30 border-black border rounded-md p-5"
+                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
                   />
                 </div>
-                <div className="flex gap-5  items-center">
-                  <p>Chest:</p>{" "}
+                <div className="flex gap-4 items-center w-full justify-between">
+                  <p className="shrink-0">Chest:</p>
                   <input
                     type="number"
                     min="0"
@@ -111,11 +111,11 @@ export default function ProgressPage() {
                       )
                     }
                     value={chest}
-                    className="w-30 border-black border rounded-md p-5"
+                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
                   />
                 </div>
-                <div className="flex  gap-5  items-center">
-                  <p>Thigh:</p>{" "}
+                <div className="flex gap-4 items-center w-full justify-between">
+                  <p className="shrink-0">Thigh:</p>
                   <input
                     type="number"
                     value={thigh}
@@ -125,11 +125,11 @@ export default function ProgressPage() {
                       )
                     }
                     min="0"
-                    className="w-30 border-black border rounded-md p-5"
+                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
                   />
                 </div>
-                <div className="flex gap-5  items-center">
-                  <p>Biceps:</p>
+                <div className="flex gap-4 items-center w-full justify-between">
+                  <p className="shrink-0">Biceps:</p>
                   <input
                     type="number"
                     min="0"
@@ -139,23 +139,23 @@ export default function ProgressPage() {
                         e.target.value === "" ? "" : Number(e.target.value)
                       )
                     }
-                    className="w-30 border-black border rounded-md p-5"
+                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
                   />
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-center h-full flex-col w-1/2 border-l border-black">
+            <div className="flex items-center justify-center h-full flex-col w-full md:w-1/2 md:border-l md:border-black">
               <div className="w-full h-1/12 flex items-center justify-center">
                 <p className="font-bold text-white text-xl">Maxes</p>
               </div>
-              <div className="h-11/12 w-full gap-5 flex  justify-center items-center flex-col font-bold text-white">
-                <div className="flex gap-5 items-center">
-                  <p>Bench Press:</p>
+              <div className="h-11/12 w-full gap-5 flex flex-col justify-center items-center font-bold text-white">
+                <div className="flex gap-4 items-center w-full justify-between">
+                  <p className="shrink-0">Bench Press:</p>
                   <input
                     type="number"
                     min="0"
                     value={bpress}
-                    className="w-30 border-black border rounded-md p-5"
+                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
                     onChange={(e) =>
                       setBpress(
                         e.target.value === "" ? "" : Number(e.target.value)
@@ -163,13 +163,13 @@ export default function ProgressPage() {
                     }
                   />
                 </div>
-                <div className="flex gap-5 items-center">
-                  <p>Squat:</p>
+                <div className="flex gap-4 items-center w-full justify-between">
+                  <p className="shrink-0">Squat:</p>
                   <input
                     type="number"
                     min="0"
                     value={squat}
-                    className="w-30 border-black border rounded-md p-5"
+                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
                     onChange={(e) =>
                       setSquat(
                         e.target.value === "" ? "" : Number(e.target.value)
@@ -177,12 +177,12 @@ export default function ProgressPage() {
                     }
                   />
                 </div>
-                <div className="flex gap-5 items-center">
-                  <p>DeadLift:</p>
+                <div className="flex gap-4 items-center w-full justify-between">
+                  <p className="shrink-0">DeadLift:</p>
                   <input
                     type="number"
                     min="0"
-                    className="w-30 border-black border rounded-md p-5"
+                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
                     value={deadlift}
                     onChange={(e) =>
                       setDeadlift(
