@@ -11,6 +11,8 @@ export default function ProgressPage() {
   const [bpress, setBpress] = useState<number | "">("")
   const [squat, setSquat] = useState<number | "">("")
   const [deadlift, setDeadlift] = useState<number | "">("")
+  const [cups, setCups] = useState<string>("")
+  const [cmessage, setCmessage] = useState<string>("")
 
   useEffect(() => {
     const storedWaist = localStorage.getItem("waist")
@@ -20,6 +22,9 @@ export default function ProgressPage() {
     const storedBpress = localStorage.getItem("bpress")
     const storedSquat = localStorage.getItem("squat")
     const storedDeadlift = localStorage.getItem("deadlift")
+    const storedCups = localStorage.getItem("cups")
+
+    if (storedCups) setCups(storedCups)
 
     if (storedWaist) setWaist(Number(storedWaist))
     if (storedChest) setChest(Number(storedChest))
@@ -31,10 +36,29 @@ export default function ProgressPage() {
   }, [])
 
   useEffect(() => {
+    if (cups !== "") {
+      localStorage.setItem("cups", cups)
+      const cupNumber = Number(cups)
+      if (cupNumber < 8) {
+        setCmessage("You should drink more water!")
+      } else if (cupNumber >= 8 && cupNumber <= 13) {
+        setCmessage("Good job on staying hydrated!")
+      } else {
+        setCmessage("Be careful not to overhydrate!")
+      }
+    }
+  }, [cups])
+
+  useEffect(() => {
     if (waist !== "") {
       localStorage.setItem("waist", waist.toString())
     }
   }, [waist])
+  useEffect(() => {
+    if (cups !== "") {
+      localStorage.setItem("cups", cups.toString())
+    }
+  }, [cups])
 
   useEffect(() => {
     if (chest !== "") {
@@ -80,118 +104,140 @@ export default function ProgressPage() {
           <div className="w-full p-5 flex items-center text-2xl font-bold text-white justify-center  border-b-2 border-black">
             <p>Progress Tracker</p>
           </div>
-          <div className="w-full h-full overflow-y-auto flex flex-col md:flex-row">
-            <div className="flex p-4 md:p-5 flex-col justify-center h-full w-full md:w-1/2 md:border-r md:border-black">
-              <div className="w-full flex h-1/12 items-center justify-center ">
-                <p className="font-bold text-white text-xl"> Measurements</p>
+          <div className="w-full h-full overflow-y-auto">
+            <div className="w-full h-10/12 flex flex-row flex-wrap ">
+              <div className="flex-1   md:p-5 flex flex-col justify-center w-full md:w-1/2 border-r md:border-r md:border-black min-h-64 md:min-h-112">
+                <div className="w-full flex h-1/12 items-center justify-center ">
+                  <p className="font-bold text-white text-xl"> Measurements</p>
+                </div>
+                <div className="w-full font-bold items-center gap-5 justify-center text-white flex flex-col">
+                  <div className="flex gap-4 items-center w-full justify-between">
+                    <p className="shrink-0">Waist:</p>
+                    <input
+                      type="number"
+                      min="0"
+                      placeholder="cm"
+                      onChange={(e) =>
+                        setWaist(
+                          e.target.value === "" ? "" : Number(e.target.value)
+                        )
+                      }
+                      value={waist}
+                      className="w-20 sm:w-28 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
+                    />
+                  </div>
+                  <div className="flex gap-4 items-center w-full justify-between">
+                    <p className="shrink-0">Chest:</p>
+                    <input
+                      type="number"
+                      min="0"
+                      placeholder="cm"
+                      onChange={(e) =>
+                        setChest(
+                          e.target.value === "" ? "" : Number(e.target.value)
+                        )
+                      }
+                      value={chest}
+                      className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
+                    />
+                  </div>
+                  <div className="flex gap-4 items-center w-full justify-between">
+                    <p className="shrink-0">Thigh:</p>
+                    <input
+                      type="number"
+                      placeholder="cm"
+                      value={thigh}
+                      onChange={(e) =>
+                        setThigh(
+                          e.target.value === "" ? "" : Number(e.target.value)
+                        )
+                      }
+                      min="0"
+                      className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
+                    />
+                  </div>
+                  <div className="flex gap-4 items-center w-full justify-between">
+                    <p className="shrink-0">Biceps:</p>
+                    <input
+                      type="number"
+                      min="0"
+                      placeholder="cm"
+                      value={biceps}
+                      onChange={(e) =>
+                        setBiceps(
+                          e.target.value === "" ? "" : Number(e.target.value)
+                        )
+                      }
+                      className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="w-full font-bold items-center gap-5 justify-center text-white h-11/12 flex flex-col">
-                <div className="flex gap-4 items-center w-full justify-between">
-                  <p className="shrink-0">Waist:</p>
-                  <input
-                    type="number"
-                    min="0"
-                    onChange={(e) =>
-                      setWaist(
-                        e.target.value === "" ? "" : Number(e.target.value)
-                      )
-                    }
-                    value={waist}
-                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
-                  />
+              <div className="flex-1  items-center justify-center flex flex-col w-full md:w-1/2 md:border-l md:border-black md:p-5 min-h-64 md:min-h-112">
+                <div className="w-full flex items-center justify-center">
+                  <p className="font-bold text-white text-xl">Maxes</p>
                 </div>
-                <div className="flex gap-4 items-center w-full justify-between">
-                  <p className="shrink-0">Chest:</p>
-                  <input
-                    type="number"
-                    min="0"
-                    onChange={(e) =>
-                      setChest(
-                        e.target.value === "" ? "" : Number(e.target.value)
-                      )
-                    }
-                    value={chest}
-                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
-                  />
-                </div>
-                <div className="flex gap-4 items-center w-full justify-between">
-                  <p className="shrink-0">Thigh:</p>
-                  <input
-                    type="number"
-                    value={thigh}
-                    onChange={(e) =>
-                      setThigh(
-                        e.target.value === "" ? "" : Number(e.target.value)
-                      )
-                    }
-                    min="0"
-                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
-                  />
-                </div>
-                <div className="flex gap-4 items-center w-full justify-between">
-                  <p className="shrink-0">Biceps:</p>
-                  <input
-                    type="number"
-                    min="0"
-                    value={biceps}
-                    onChange={(e) =>
-                      setBiceps(
-                        e.target.value === "" ? "" : Number(e.target.value)
-                      )
-                    }
-                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
-                  />
+                <div className="w-full gap-5 flex flex-col justify-center items-center font-bold text-white">
+                  <div className="flex gap-4 items-center w-full justify-between">
+                    <p className="shrink-0">Bench Press:</p>
+                    <input
+                      type="number"
+                      min="0"
+                      placeholder="kg"
+                      value={bpress}
+                      className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
+                      onChange={(e) =>
+                        setBpress(
+                          e.target.value === "" ? "" : Number(e.target.value)
+                        )
+                      }
+                    />
+                  </div>
+                  <div className="flex gap-4 items-center w-full justify-between">
+                    <p className="shrink-0">Squat:</p>
+                    <input
+                      type="number"
+                      min="0"
+                      placeholder="kg"
+                      value={squat}
+                      className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
+                      onChange={(e) =>
+                        setSquat(
+                          e.target.value === "" ? "" : Number(e.target.value)
+                        )
+                      }
+                    />
+                  </div>
+                  <div className="flex gap-4 items-center w-full justify-between">
+                    <p className="shrink-0">DeadLift:</p>
+                    <input
+                      type="number"
+                      min="0"
+                      placeholder="kg"
+                      className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
+                      value={deadlift}
+                      onChange={(e) =>
+                        setDeadlift(
+                          e.target.value === "" ? "" : Number(e.target.value)
+                        )
+                      }
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-center h-full flex-col w-full md:w-1/2 md:border-l md:border-black">
-              <div className="w-full h-1/12 flex items-center justify-center">
-                <p className="font-bold text-white text-xl">Maxes</p>
-              </div>
-              <div className="h-11/12 w-full gap-5 flex flex-col justify-center items-center font-bold text-white">
-                <div className="flex gap-4 items-center w-full justify-between">
-                  <p className="shrink-0">Bench Press:</p>
-                  <input
-                    type="number"
-                    min="0"
-                    value={bpress}
-                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
-                    onChange={(e) =>
-                      setBpress(
-                        e.target.value === "" ? "" : Number(e.target.value)
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex gap-4 items-center w-full justify-between">
-                  <p className="shrink-0">Squat:</p>
-                  <input
-                    type="number"
-                    min="0"
-                    value={squat}
-                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
-                    onChange={(e) =>
-                      setSquat(
-                        e.target.value === "" ? "" : Number(e.target.value)
-                      )
-                    }
-                  />
-                </div>
-                <div className="flex gap-4 items-center w-full justify-between">
-                  <p className="shrink-0">DeadLift:</p>
-                  <input
-                    type="number"
-                    min="0"
-                    className="w-24 sm:w-32 md:w-40 max-w-full border-black border rounded-md p-2 sm:p-4"
-                    value={deadlift}
-                    onChange={(e) =>
-                      setDeadlift(
-                        e.target.value === "" ? "" : Number(e.target.value)
-                      )
-                    }
-                  />
-                </div>
-              </div>
+
+            <div className="w-full mt-4 flex flex-col items-center gap-2">
+              <p className="text-white font-bold">Remember to drink water</p>
+              <p className="text-white font-bold text-xs">{cmessage}</p>
+              <input
+                type="number"
+                placeholder="cups"
+                min="0"
+                value={cups}
+                className="w-24 sm:w-28 md:w-32 font-bold h-10 p-2 text-white"
+                onChange={(e) => setCups(e.target.value)}
+              />
             </div>
           </div>
         </div>

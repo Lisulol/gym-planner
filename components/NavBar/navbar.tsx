@@ -8,7 +8,7 @@ export default function NavBarComponent() {
 
   return (
     <div>
-      <div className="w-full bg-[#161616] text-white text-2xl h-16 border-b-6 border-[#393d3d] flex items-center">
+      <div className="w-full bg-[#161616] text-white text-2xl h-16 gradient-border-bottom flex items-center">
         <div className="flex items-center px-3">
           <button
             className="hover:bg-gray-600 rounded p-3"

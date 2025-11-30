@@ -54,18 +54,18 @@ export default function MainPage() {
         <div className="w-full h-full flex items-center  justify-center">
           <div className="flex h-4/5 w-4/5 items-center gap-1 font-bold justify-center">
             <Link href="/Workout" className="flex h-1/3 w-1/3 ">
-              <div className="flex h-full w-full hover:bg-[#1d1d1d] items-center text-white justify-center rounded-4xl border-2 border-[#141414] bg-[#000000]">
+              <div className="flex h-full w-full hover:bg-gray-400  border-[#500af3] items-center text-black justify-center rounded-4xl border-2  bg-[#ffffff]">
                 Plan your workouts
               </div>
             </Link>
             <Link href="/progress" className="flex h-1/3 w-1/3 ">
-              <div className="flex h-full w-full hover:bg-[#1d1d1d] items-center text-white justify-center rounded-4xl border-2 border-[#141414] bg-[#000000]">
+              <div className="flex h-full w-full hover:bg-gray-400 items-center text-black justify-center rounded-4xl border-2 border-[#500af3] bg-[#ffffff]">
                 Track your progress
               </div>
             </Link>
 
             <Link href="/splits" className="flex h-1/3 w-1/3 ">
-              <div className="flex h-full w-full hover:bg-[#1d1d1d] items-center text-white justify-center rounded-4xl border-2 border-[#141414] bg-[#000000]">
+              <div className="flex h-full w-full hover:bg-gray-400 items-center text-black justify-center rounded-4xl border-2 border-[#500af3] bg-[#ffffff]">
                 Choose your splits
               </div>
             </Link>

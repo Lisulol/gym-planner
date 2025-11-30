@@ -45,7 +45,7 @@ export default function SnowBackground() {
     generateSnowflakes()
     setInterval(() => {
       generateSnowflakes()
-    }, 10000)
+    }, 50000)
     const animationInterval = setInterval(animateSnowflakes, 50)
 
     return () => clearInterval(animationInterval)

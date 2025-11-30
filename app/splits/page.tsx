@@ -338,7 +338,7 @@ export default function Spilts() {
           >
             <div
               onClick={(e) => e.stopPropagation()}
-              className="flex w-11/12 sm:w-4/5 max-w-4xl h-4/5 flex-col bg-[#222222] rounded-4xl border-2 overflow-hidden p-4 sm:p-10 mx-auto"
+              className="flex w-11/12 sm:w-4/5 max-w-4xl h-4/5 flex-col bg-[#222222] rounded-4xl border-2 overflow-hidden   mx-auto"
             >
               <div className="w-full p-10 flex items-center justify-center border-b-4 border-black">
                 <p className="font-bold text-2xl text-white">
